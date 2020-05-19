@@ -1,27 +1,31 @@
-barebones setup for JavaScript / Node projects replace this with a one-liner phrase describing this project or app
+# Web app for the supply of qualified teachers to local communities
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/fe267ebd57cb46e99245517ee57a9dde)](https://app.codacy.com/gh/BuildForSDG/Team-032-Product?utm_source=github.com&utm_medium=referral&utm_content=BuildForSDG/Team-032-Product&utm_campaign=Badge_Grade_Settings)
-[![Codacy Badge](https://img.shields.io/badge/Code%20Quality-D-red)](https://img.shields.io/badge/Code%20Quality-D-red)
 
 
 ## About
 
-What is this project about. Ok to enrich here or the section above it with an image. 
+This project is about bridging the educational gap in local communities across Africa, in line with goal 4 of the Sustainable Development Goals where access to good education is strongly limited due to this cause. By supplying such communities with qualified school teachers, we will be giving members of those communities, both old and young access to quality education that will positively impact their economy and welfare.
 
-Once this repo has been setup on Codacy by the TTL, replace the above badge with the actual one from the Codacy dashboard, and add the code coverage badge as well. This is mandatory
-
-This is a simple JavaScript starter repo template for setting up your project. The setup contains
-
-- Jest: For runnung tests. We strongly recommend that JavaScript projects use Jest
-
-- Eslint & Prettier: For formatting code to match ESlint AirBnB coding standard. You might need to install the ESlint and Prettier plugins for your code editor to make the most of these utilities
 
 ## Why
 
-Talk about what problem this solves, what SDG(s) and SGD targets it addresses and why these are imoirtant
+We have come to realize how poor many local, especially rural, communities are in the African society, and one very common factor between these communities is the lack of proper education amongst the populace.
+
+Although some of these communities might have had to government or Non-governmental Organisations come to their support in terms of food or infrastructural facilities that end up getting obsolete quickly because of lack of maintenance, their lifestyle and economy have experienced no significant growth.
+
+To battle this terrible situation, the best support that could be given these people is the power of an educated mind. Many of these communities have schools that are poorly equipped, some void of teachers or students, many children going out to sell commodities, offer services, while supporting the livelihood of their families at the cost of the own personal development.
+
+With an army of well trained, experienced and financially supported teachers, more families will be encouraged to get educated, grow and impact their communities in ways they never could imagine.
+
 
 ## Usage
- How would someone use what you have built, include URLs to the deployed app, service e.t.c when you have it setup
+
+- Teachers signup
+- Teachers get trained and certified
+- Teachers get deployed
+- Teachers have acces to communicate with other stakeholders like the governing body of the programme
+- Teachers have access to educational resources
 
 
 ## Setup
@@ -47,7 +51,16 @@ This starter uses [Parcel](https://parceljs.org/getting_started.html) as the bun
 
 ## Authors
 
-List the team behind this project. Their names linked to their Github, LinkedIn, or Twitter accounts should siffice. Ok to signify the role they play in the project, including the TTL and mentor
+**Mentor**
+- [Urban Ishimwe](https://github.com/urbanishimwe)
+
+**TTL**
+- [Akanji Oluwatobiloba](https://github.com/Tboy-AK)
+
+**Members**
+- [Adebayo Oyeleye](https://github.com/adebayoyeleye)
+- [Edafe Oghenefego](https://github.com/fegoworks)
+- [Kadiri Sunday Eshiomonu](https://github.com/kadirisunday)
 
 ## Contributing
 If this project sounds interesting to you and you'd like to contribute, thank you!
