@@ -16,8 +16,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const port = process.env.PORT;
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Credentials', 'include');
-  res.setHeader('Access-Control-Allow-Origin', process.env.ACCESS_CONTROL_ALLOW_ORIGIN);
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  // res.setHeader('Access-Control-Allow-Origin', process.env.ACCESS_CONTROL_ALLOW_ORIGIN);
   res.setHeader('Vary', 'Origin');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization, Set-Cookie');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
@@ -26,8 +26,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cors({
-  origin: process.env.ACCESS_CONTROL_ALLOW_ORIGIN,
-  credentials: true
+  origin: ['https://localhost:8080', 'https://localhost:3000']
 }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -38,6 +37,7 @@ app.get('*', (req, res) => res.status(200).send({
   message: 'Welcome to Team-032 SGD Goal4 project'
 }));
 
-app.listen(port, () => console.log(`Server running on PORT ${8000}`));
+// eslint-disable-next-line no-console
+app.listen(port, () => console.log(`Server running on PORT ${3000}`));
 
 export default app;
