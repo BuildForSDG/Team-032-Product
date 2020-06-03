@@ -16,7 +16,7 @@ with time zone NOT NULL,
 (id), 
     CONSTRAINT auth_email_key UNIQUE
 (email)
-)
+);
 
 
 CREATE SEQUENCE communities_id_seq;
@@ -46,7 +46,7 @@ with time zone NOT NULL,
 with time zone NOT NULL,
     CONSTRAINT communities_pkey PRIMARY KEY
 (id)
-)
+);
 
 
 CREATE SEQUENCE community_subjects_needed_id_seq;
@@ -81,7 +81,7 @@ UPDATE CASCADE
         ON
 DELETE CASCADE
         NOT VALID
-)
+);
 
 
 CREATE SEQUENCE institutes_id_seq;
@@ -106,7 +106,7 @@ with time zone NOT NULL,
 with time zone NOT NULL,
     CONSTRAINT institutes_pkey PRIMARY KEY
 (id)
-)
+);
 
 
 CREATE SEQUENCE subjects_id_seq;
@@ -124,7 +124,7 @@ with time zone NOT NULL,
 with time zone NOT NULL,
     CONSTRAINT subjects_pkey PRIMARY KEY
 (id)
-)
+);
 
 
 CREATE SEQUENCE teacher_subjects_id_seq;
@@ -159,7 +159,7 @@ UPDATE CASCADE
         ON
 DELETE CASCADE
         NOT VALID
-)
+);
 
 
 CREATE SEQUENCE teachers_id_seq;
@@ -194,7 +194,7 @@ with time zone NOT NULL,
     CONSTRAINT teacher_phone_key UNIQUE
 (phone)
 
-)
+);
 
 
 CREATE SEQUENCE trainer_subjects_id_seq;
@@ -228,7 +228,7 @@ UPDATE CASCADE
         ON
 DELETE CASCADE
         NOT VALID
-)
+);
 
 
 CREATE SEQUENCE trainers_id_seq;
@@ -271,4 +271,4 @@ UPDATE CASCADE
         ON
 DELETE CASCADE
         NOT VALID
-)
+);
