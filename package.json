@@ -18,7 +18,8 @@
     "test:cover": "jest --coverage",
     "lint": "eslint \"src/**/*.js\"",
     "start": "parcel ./src/index.html",
-    "dev": "nodemon server.js",
+    "dev": "npm run build && node dist/app.js",
+    "build": "rimraf dist/ && babel ./src --out-dir dist/",
     "host": "git push heroku develop:master",
     "tails": "heroku logs --tail"
   },
@@ -54,6 +55,7 @@
     "sequelize": "^5.21.9"
   },
   "devDependencies": {
+    "@babel/cli": "^7.10.1",
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
     "babel-jest": "^25.4.0",
@@ -61,7 +63,8 @@
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
     "jest": "^25.4.0",
-    "parcel-bundler": "^1.12.4"
+    "parcel-bundler": "^1.12.4",
+    "rimraf": "^3.0.2"
   },
   "browserslist": [
     "last 1 Chrome versions"

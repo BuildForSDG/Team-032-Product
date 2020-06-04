@@ -9,11 +9,11 @@ dotenv.config();
 
 const app = express();
 
-app.use(bodyParser.json);
+app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const port = process.env.PORT;
+const port = process.env.PORT ? process.env.PORT : 3000;
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -37,7 +37,8 @@ app.get('*', (req, res) => res.status(200).send({
   message: 'Welcome to Team-032 SGD Goal4 project'
 }));
 
+
 // eslint-disable-next-line no-console
-app.listen(port, () => console.log(`Server running on PORT ${3000}`));
+app.listen(port, () => console.log(`Server running on PORT ${port}`));
 
 export default app;
