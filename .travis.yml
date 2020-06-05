@@ -1,0 +1,35 @@
+language: node_js
+node_js:
+  - 12
+cache: npm
+install:
+  - npm ci
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database edventure;' -U postgres
+  - psql "dbname=edventure" -a -f init.pgsql
+addons:
+  postgresql: "10"
+  apt:
+    packages:
+      - postgresql-10
+      - postgresql-client-10
+env:
+  global:
+    - DB_USER=postgres
+    - DB_HOST=localhost
+    - DB_DATABASE=edventure
+    - DB_PORT=5432
+    - DB_PASSWORD=
+script:
+  - npm test
+deploy:
+  - cleanup: false
+    provider: heroku
+    api_key:
+      secure: ""
+    app: howmies-api-develop
+    on:
+      repo: Howmies/howmies-api
+      branch: develop
