@@ -7,7 +7,6 @@
 
 This project is about bridging the educational gap in local communities across Africa, in line with goal 4 of the Sustainable Development Goals where access to good education is strongly limited due to this cause. By supplying such communities with qualified school teachers, we will be giving members of those communities, both old and young access to quality education that will positively impact their economy and welfare.
 
-
 ## Why
 
 We have come to realize how poor many local, especially rural, communities are in the African society, and one very common factor between these communities is the lack of proper education amongst the populace.
@@ -18,15 +17,12 @@ To battle this terrible situation, the best support that could be given these pe
 
 With an army of well trained, experienced and financially supported teachers, more families will be encouraged to get educated, grow and impact their communities in ways they never could imagine.
 
-
 ## Usage
-
-- Teachers signup
-- Teachers get trained and certified
-- Teachers get deployed
-- Teachers have acces to communicate with other stakeholders like the governing body of the programme
-- Teachers have access to educational resources
-
+  - Teachers signup
+  - Teachers get trained and certified
+  - Teachers get deployed
+  - Teachers have acces to communicate with other stakeholders like the governing body of the programme
+  - Teachers have access to educational resources
 
 ## Setup
 
@@ -41,26 +37,25 @@ All tests should be written in the `__tests__' folder. There's a sample in there
 This starter uses [Parcel](https://parceljs.org/getting_started.html) as the bundler. It is much simpler that WebPack and the others
 
 #### Hints
-
-- Run `npm install` or `yarn install` to get started. We'll assume you are using Yarn.
-- Install additional dependencies: `yarn add <dependency-name> [-D]`
-- Run tests: `yarn test`
-- Run tests with test coverage info: `yarn test:cover`
-- Check the codebase for proper syntax and formatting compliance: `yarn lint`
-- Run your app in local dev mode: `yarn start`. This puts the bundled app in a `dist` folder, set up a local web server at localhost:1234, and continues to watch for your code changes which it syncs with the local server. This means if you loaded the app in a browser, it will auto-refresh as you code along. Feel free to use whatever bundler best meets your needs. Parcel was only added as a sample and for those looking for a simple but effective solution to the hassle of bundlers. 
+  - Run `npm install` or `yarn install` to get started. We'll assume you are using Yarn.
+  - Install additional dependencies: `yarn add <dependency-name> [-D]`
+  - Run tests: `yarn test`
+  - Run tests with test coverage info: `yarn test:cover`
+  - Check the codebase for proper syntax and formatting compliance: `yarn lint`
+  - Run your app in local dev mode: `yarn start`. This puts the bundled app in a `dist` folder, set up a local web server at localhost:1234, and continues to watch for your code changes which it syncs with the local server. This means if you loaded the app in a browser, it will auto-refresh as you code along. Feel free to use whatever bundler best meets your needs. Parcel was only added as a sample and for those looking for a simple but effective solution to the hassle of bundlers. 
 
 ## Authors
 
-**Mentor**
-- [Urban Ishimwe](https://github.com/urbanishimwe)
+Mentor:
+  - [Urban Ishimwe](https://github.com/urbanishimwe)
 
-**TTL**
-- [Akanji Oluwatobiloba](https://github.com/Tboy-AK)
+TTL:
+  - [Akanji Oluwatobiloba](https://github.com/Tboy-AK)
 
-**Members**
-- [Adebayo Oyeleye](https://github.com/adebayoyeleye)
-- [Edafe Oghenefego](https://github.com/fegoworks)
-- [Kadiri Sunday Eshiomonu](https://github.com/kadirisunday)
+Members:
+  - [Adebayo Oyeleye](https://github.com/adebayoyeleye)
+  - [Edafe Oghenefego](https://github.com/fegoworks)
+  - [Kadiri Sunday Eshiomonu](https://github.com/kadirisunday)
 
 ## Contributing
 If this project sounds interesting to you and you'd like to contribute, thank you!
@@ -79,4 +74,3 @@ It's powerful to always give credit.
 
 ## LICENSE
 MIT
-
