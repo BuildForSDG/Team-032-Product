@@ -5,6 +5,8 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import passport from 'passport';
 
+import routes from './routes/index';
+
 dotenv.config();
 
 const app = express();
@@ -33,7 +35,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(passport.initialize());
 
-app.get('*', (req, res) => res.status(200).send({
+app.use('/api/v1', routes);
+
+
+app.get('/', (req, res) => res.status(200).send({
   message: 'Welcome to Team-032 SGD Goal4 project'
 }));
 
