@@ -22,6 +22,11 @@ env:
     - DB_DATABASE=edventure
     - DB_PORT=5432
     - DB_PASSWORD=
+    - TEST_DB_USER=postgres
+    - TEST_DB_HOST=localhost
+    - TEST_DB_DATABASE=edventure
+    - TEST_DB_PORT=5432
+    - TEST_DB_PASSWORD=
 script:
   - npm test
 deploy:

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const registrationValidator = require('../middlewares/registerCommunityValidator');
-const registration = require('../controllers/communityController');
+const registration = require('../controllers/registerCommunityController');
 
 router.post('/reg', registrationValidator, registration);
 
