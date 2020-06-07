@@ -4,12 +4,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
-const ServerDemo = require('./routes/ServerDemo');
+const routes = require('./routes/index');
 
 dotenv.config();
 
 const app = express();
-const server = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -29,6 +28,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(passport.initialize());
 
-server.use('/api/v1', app, ServerDemo);
+app.use('/api/v1', routes);
 
-module.exports = server;
+module.exports = app;

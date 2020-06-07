@@ -1,8 +1,8 @@
-import dotenv from 'dotenv';
-import { Pool } from 'pg';
-
+const dotenv = require('dotenv');
+const { Pool } = require('pg');
 
 dotenv.config();
+
 const conObj = {};
 
 switch (process.env.NODE_ENV) {
@@ -13,7 +13,7 @@ switch (process.env.NODE_ENV) {
     conObj.password = process.env.DEV_DB_PASSWORD;
     conObj.port = process.env.DEV_DB_PORT;
     break;
-  case 'testing':
+  case 'test':
     conObj.user = process.env.TEST_DB_USER;
     conObj.host = process.env.TEST_DB_HOST;
     conObj.database = process.env.TEST_DB_DATABASE;
@@ -29,6 +29,4 @@ switch (process.env.NODE_ENV) {
     break;
 }
 
-const pool = new Pool(conObj);
-
-export default pool;
+module.exports = new Pool(conObj);
