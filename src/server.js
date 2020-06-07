@@ -1,5 +1,5 @@
 const dotenv = require('dotenv');
-const http = require('http');
+// const http = require('http');
 const app = require('./app');
 
 dotenv.config();
@@ -15,10 +15,11 @@ const normalizePort = (val) => {
   }
   return false;
 };
-const port = normalizePort(process.env.PORT);
-app.set('port', port);
 
-const server = http.createServer(app);
+const port = normalizePort(process.env.PORT);
+// app.set('port', port);
+
+// const server = http.createServer(app);
 
 // const errorHandler = (error) => {
 //   if (error.syscall !== 'listen') {
@@ -47,5 +48,6 @@ const server = http.createServer(app);
 //   console.log(`Listening on ${bind}`);
 // });
 
-server.listen(port);
-module.exports = server;
+module.exports = app
+  .set('port', port)
+  .listen(port);

@@ -1,3 +1,5 @@
+-- Create tables
+
 CREATE SEQUENCE auth_id_seq;
 CREATE TABLE
 IF NOT EXISTS auth
@@ -272,3 +274,187 @@ UPDATE CASCADE
 DELETE CASCADE
         NOT VALID
 );
+
+
+-- Create functions
+
+
+CREATE FUNCTION public.date_time_created_stamp()
+    RETURNS trigger
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE NOT LEAKPROOF
+AS $BODY$BEGIN
+	NEW.date_created := CURRENT_TIMESTAMP;
+	RETURN NEW;
+END;$BODY$;
+
+COMMENT ON FUNCTION public.date_time_created_stamp()
+    IS 'Time stamp to track the date and time of creation of a table row data';
+
+
+CREATE FUNCTION public.date_time_modified_stamp()
+    RETURNS trigger
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE NOT LEAKPROOF
+AS $BODY$BEGIN
+	NEW.date_modified := CURRENT_TIMESTAMP;
+	RETURN NEW;
+END;$BODY$;
+
+COMMENT ON FUNCTION public.date_time_modified_stamp()
+    IS 'Time stamp to track the date and time of modification of a table row data';
+
+
+-- Create triggers
+
+
+CREATE TRIGGER auth_date_time_created_stamp
+    AFTER INSERT
+    ON public.auth
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.date_time_created_stamp();
+
+COMMENT ON TRIGGER auth_date_time_created_stamp ON public.auth
+    IS 'Date and time of creation of an authorized app user';
+
+
+CREATE TRIGGER auth_date_time_modified_stamp
+    BEFORE INSERT OR UPDATE 
+    ON public.auth
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.date_time_modified_stamp();
+
+COMMENT ON TRIGGER auth_date_time_modified_stamp ON public.auth
+    IS 'Date and time of modification of an authorized app user';
+
+
+CREATE TRIGGER communities_date_time_created_stamp
+    BEFORE INSERT
+    ON public.communities
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.date_time_created_stamp();
+
+COMMENT ON TRIGGER communities_date_time_created_stamp ON public.communities
+    IS 'Date and time of creation of a registered community';
+
+
+CREATE TRIGGER communities_date_time_modified_stamp
+    BEFORE INSERT OR UPDATE 
+    ON public.communities
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.date_time_modified_stamp();
+
+COMMENT ON TRIGGER communities_date_time_modified_stamp ON public.communities
+    IS 'Date and time of modification of a registered community';
+
+
+CREATE TRIGGER community_subjects_date_time_created_stamp
+    BEFORE INSERT
+    ON public.community_subjects_needed
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.date_time_created_stamp();
+
+COMMENT ON TRIGGER community_subjects_date_time_created_stamp ON public.community_subjects_needed
+    IS 'Date and time of creation of a needed community subject';
+
+
+CREATE TRIGGER institutes_date_time_created_stamp
+    BEFORE INSERT
+    ON public.institutes
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.date_time_created_stamp();
+
+COMMENT ON TRIGGER institutes_date_time_created_stamp ON public.institutes
+    IS 'Date and time of creation of a registered institute';
+
+
+CREATE TRIGGER institutes_date_time_modified_stamp
+    BEFORE INSERT OR UPDATE 
+    ON public.institutes
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.date_time_modified_stamp();
+
+COMMENT ON TRIGGER institutes_date_time_modified_stamp ON public.institutes
+    IS 'Date and time of modification of a registered institute';
+
+
+CREATE TRIGGER subjects_date_time_created_stamp
+    BEFORE INSERT
+    ON public.subjects
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.date_time_created_stamp();
+
+COMMENT ON TRIGGER subjects_date_time_created_stamp ON public.subjects
+    IS 'Date and time of creation of a registered subject';
+
+
+CREATE TRIGGER subjects_date_time_modified_stamp
+    BEFORE INSERT OR UPDATE 
+    ON public.subjects
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.date_time_modified_stamp();
+
+COMMENT ON TRIGGER subjects_date_time_modified_stamp ON public.subjects
+    IS 'Date and time of modification of a registered subject';
+
+
+CREATE TRIGGER teacher_subjects_date_time_created_stamp
+    BEFORE INSERT
+    ON public.teacher_subjects
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.date_time_created_stamp();
+
+COMMENT ON TRIGGER teacher_subjects_date_time_created_stamp ON public.teacher_subjects
+    IS 'Date and time of creation of an approved teacher subject';
+
+
+CREATE TRIGGER teachers_date_time_created_stamp
+    BEFORE INSERT
+    ON public.teachers
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.date_time_created_stamp();
+
+COMMENT ON TRIGGER teachers_date_time_created_stamp ON public.teachers
+    IS 'Date and time of creation of an authorized teacher user';
+
+
+CREATE TRIGGER teachers_date_time_modified_stamp
+    BEFORE INSERT OR UPDATE 
+    ON public.teachers
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.date_time_modified_stamp();
+
+COMMENT ON TRIGGER teachers_date_time_modified_stamp ON public.teachers
+    IS 'Date and time of modification of an authorized teacher user';
+
+
+CREATE TRIGGER trainer_subjects_date_time_created_stamp
+    BEFORE INSERT
+    ON public.trainer_subjects
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.date_time_created_stamp();
+
+COMMENT ON TRIGGER trainer_subjects_date_time_created_stamp ON public.trainer_subjects
+    IS 'Date and time of creation of an approved trainer subject';
+
+
+CREATE TRIGGER trainers_date_time_created_stamp
+    BEFORE INSERT
+    ON public.trainers
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.date_time_created_stamp();
+
+COMMENT ON TRIGGER trainers_date_time_created_stamp ON public.trainers
+    IS 'Date and time of creation of an approved trainer user';
+
+
+CREATE TRIGGER trainers_date_time_modified_stamp
+    BEFORE INSERT OR UPDATE 
+    ON public.trainers
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.date_time_modified_stamp();
+
+COMMENT ON TRIGGER trainers_date_time_modified_stamp ON public.trainers
+    IS 'Date and time of modification of an approved trainer user';
