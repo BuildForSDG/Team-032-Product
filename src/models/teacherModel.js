@@ -26,20 +26,18 @@ class TeacherModel {
     newTeacher = {
       ...teacher
     };
-    newTeacher.id = uuid();
     newTeacher.password = hashPassword(newTeacher.password);
 
     const user = `INSERT INTO
-        teachers(id, email, phone, country, state, lga, town, deployed, level_of_education_id)
-        VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
+        teachers(email, phone, country, state, lga, town, deployed, level_of_education_id)
+        VALUES($1, $2, $3, $4, $5, $6, $7, $8)
         returning *`;
     const auth = `INSERT INTO
-        auth(id, email, password)
-        VALUES($1, $2, $3)
+        auth(email, password)
+        VALUES($1, $2)
         returning *`;
 
     const userValue = [
-      newTeacher.id,
       newTeacher.email,
       newTeacher.phone,
       newTeacher.country,
@@ -50,21 +48,35 @@ class TeacherModel {
       newTeacher.level_of_education_id
     ];
 
-    const authValue = [
-      newTeacher.id,
-      newTeacher.email,
-      newTeacher.password
-    ];
+    const authValue = [newTeacher.email, newTeacher.password];
 
     try {
-      await pool.query(auth, authValue);
       const {
         rows
       } = await pool.query(user, userValue);
+      await pool.query(auth, authValue);
       const savedTeacher = rows[0];
       return Promise.resolve(savedTeacher);
     } catch (err) {
       return Promise.reject(err);
+    }
+  }
+
+  static async findByEmail(email) {
+    const text = ' SELECT * FROM auth WHERE email= $1 ';
+    const value = [email];
+    try {
+      const {
+        rows,
+        rowCount
+      } = await pool.query(text, value);
+      const result = {
+        rows,
+        rowCount
+      };
+      return Promise.resolve(result);
+    } catch (error) {
+      return Promise.reject(error);
     }
   }
 }

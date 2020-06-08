@@ -19,10 +19,8 @@ const createTables = () => {
   (100) COLLATE pg_catalog."default" NOT NULL, 
       password character varying
   (1024) COLLATE pg_catalog."default" NOT NULL, 
-      date_created timestamp
-  with time zone NOT NULL, 
-      date_modified timestamp
-  with time zone NOT NULL, 
+      date_created timestamp NOT NULL default current_timestamp, 
+      date_modified timestamp NOT NULL default current_timestamp, 
       CONSTRAINT auth_pkey PRIMARY KEY
   (id), 
       CONSTRAINT auth_email_key UNIQUE
@@ -75,10 +73,8 @@ const createTables = () => {
   (30) COLLATE pg_catalog."default" NOT NULL,
       address character varying
   (100) COLLATE pg_catalog."default" NOT NULL,
-      date_created timestamp
-  with time zone NOT NULL,
-      date_modified timestamp
-  with time zone NOT NULL,
+      date_created timestamp NOT NULL default current_timestamp,
+      date_modified timestamp NOT NULL default current_timestamp,
       CONSTRAINT institutes_pkey PRIMARY KEY
   (id)
   );
@@ -104,10 +100,8 @@ const createTables = () => {
       town character varying
   (30) COLLATE pg_catalog."default" NOT NULL,
       institute_id integer NOT NULL,
-      date_created timestamp
-  with time zone NOT NULL,
-      date_modified timestamp
-  with time zone NOT NULL,
+      date_created timestamp NOT NULL default current_timestamp,
+      date_modified timestamp NOT NULL default current_timestamp,
       CONSTRAINT trainers_pkey PRIMARY KEY
   (id),
       CONSTRAINT trainer_email_key UNIQUE
@@ -146,10 +140,8 @@ const createTables = () => {
       town character varying
   (30) COLLATE pg_catalog."default" NOT NULL,
       deployed boolean NOT NULL DEFAULT false,
-      date_created timestamp
-  with time zone NOT NULL,
-      date_modified timestamp
-  with time zone NOT NULL,
+      date_created timestamp NOT NULL default current_timestamp,
+      date_modified timestamp NOT NULL default current_timestamp,
       level_of_education_id integer NOT NULL,
       CONSTRAINT teachers_pkey PRIMARY KEY
   (id),
