@@ -1,3 +1,6 @@
+const {
+  validationResult: validator
+} = require('express-validator');
 const Teacher = require('../models/teacherModel');
 const {
   decodeToken
@@ -25,10 +28,20 @@ class TeacherController {
    * @member TeacherController
    */
   static async createTeacher(req, res) {
+    const errors = validator(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({
+        errors: errors.array()
+      });
+    }
     try {
+      const teacher = await Teacher.findByEmail(req.body.email);
+      if (teacher.rowCount > 0) {
+        return handleErrorResponse(res, 'This email is already in use', 409);
+      }
       const verificationEmail = generateVerificationEmail({
         data: req.body
-      });
+      }, 'teachers');
 
       await sendMail(
         process.env.SENDGRID_API_KEY,
@@ -42,9 +55,10 @@ class TeacherController {
     }
     return handleSuccessResponse(
       res, {
+        message: 'Verification email sent',
         email: req.body.email
       },
-      201
+      200
     );
   }
 
@@ -69,7 +83,7 @@ class TeacherController {
     } catch (e) {
       return handleErrorResponse(res, e.message);
     }
-    return handleSuccessResponse(res, teacher);
+    return handleSuccessResponse(res, teacher, 201);
   }
 }
 
