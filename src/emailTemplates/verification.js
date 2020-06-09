@@ -8,7 +8,7 @@ const {
 
 const emailTemplate = (url) => ({
   body: {
-    intro: 'Welcome to 032!',
+    intro: 'Welcome to Power Sophia!',
     action: {
       instructions: "You're almost there. To finish activating your account please click the link below.",
       button: {

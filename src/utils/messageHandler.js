@@ -4,10 +4,12 @@
  * @param {integer} statusCode
  * @return {Object}
  */
-module.exports.handleSuccessResponse = (res, data, statusCode = 200) => res.status(statusCode).json({
-  status: 'success',
-  data
-});
+module.exports.handleSuccessResponse = (res, data, statusCode = 200) => res
+  .status(statusCode)
+  .json({
+    status: 'success',
+    data
+  });
 
 /**
  * @param {string} res
