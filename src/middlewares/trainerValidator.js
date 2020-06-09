@@ -14,11 +14,8 @@ module.exports.createTrainer = [
     .trim(' ')
     .notEmpty()
     .withMessage('Input a user password')
-    .isLength({
-      max: 24,
-      min: 8
-    })
-    .withMessage('Password must be between 8 and 24 characters')
+    .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,24}$/)
+    .withMessage('Password must not be between 8 and 24 characters long, with at least a lower case, upper case, and number character')
     .escape(),
   body('phone')
     .trim(' ')
