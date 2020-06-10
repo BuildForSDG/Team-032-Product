@@ -14,8 +14,8 @@ module.exports.createTeacher = [
     .trim(' ')
     .notEmpty()
     .withMessage('Input a user password')
-    .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,24}$/)
-    .withMessage('Password must not be between 8 and 24 characters long, with at least a lower case, upper case, and number character')
+    .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9a-zA-Z]).{8,}$/)
+    .withMessage('Password must be at least 8 characters long with a lower case, upper case, and number character')
     .escape(),
   body('phone')
     .trim(' ')
@@ -64,12 +64,9 @@ module.exports.createTeacher = [
     })
     .withMessage('Length must not exceed 30 characters')
     .escape(),
-  body('deployed')
-    .notEmpty().isBoolean()
-    .withMessage('Specify true or false')
-    .escape(),
   body('level_of_education_id')
-    .notEmpty().isInt()
+    .notEmpty()
+    .isInt()
     .withMessage('Input level')
     .isLength({
       max: 2

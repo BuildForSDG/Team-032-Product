@@ -9,7 +9,6 @@ const {
   handleErrorResponse,
   handleSuccessResponse
 } = require('../utils/messageHandler');
-
 const generateVerificationEmail = require('../emailTemplates/verification');
 const sendMail = require('../utils/sendMail');
 
@@ -29,36 +28,39 @@ class TrainerController {
    */
   static async createTrainer(req, res) {
     const errors = validator(req);
+
     if (!errors.isEmpty()) {
       return res.status(422).json({
         errors: errors.array()
       });
     }
+
     try {
       const trainer = await Trainer.findByEmail(req.body.email);
+
       if (trainer.rowCount > 0) {
         return handleErrorResponse(res, 'This email is already in use', 409);
       }
+
       const verificationEmail = generateVerificationEmail({
         data: req.body
       }, 'trainers');
 
-      await sendMail(
-        process.env.SENDGRID_API_KEY,
+      sendMail(
         req.body.email,
-        process.env.SENDGRID_FROM,
-        '032 Product Email Verification',
+        'Email Verification',
         verificationEmail
       );
     } catch (e) {
       return handleErrorResponse(res, e, 500);
     }
+
     return handleSuccessResponse(
-      res, {
+      res,
+      {
         message: 'Verification email sent',
         email: req.body.email
-      },
-      200
+      }
     );
   }
 
@@ -74,15 +76,19 @@ class TrainerController {
     const {
       token
     } = req.query;
+
     let trainer;
+
     try {
       const {
         data
       } = decodeToken(token);
+
       trainer = await Trainer.create(data);
     } catch (e) {
       return handleErrorResponse(res, e.message);
     }
+
     return handleSuccessResponse(res, trainer, 201);
   }
 }

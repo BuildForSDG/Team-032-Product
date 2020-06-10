@@ -9,7 +9,6 @@ const {
 
 class TrainerModel {
   constructor(trainer) {
-    this.id = trainer.id;
     this.email = trainer.email;
     this.phone = trainer.phone;
     this.password = trainer.password;
@@ -49,10 +48,10 @@ class TrainerModel {
     const authValue = [newTrainer.email, newTrainer.password];
 
     try {
+      await pool.query(auth, authValue);
       const {
         rows
       } = await pool.query(user, userValue);
-      await pool.query(auth, authValue);
       const savedTrainer = rows[0];
       return Promise.resolve(savedTrainer);
     } catch (err) {

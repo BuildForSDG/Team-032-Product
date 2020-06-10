@@ -1,4 +1,7 @@
+const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
+
+dotenv.config();
 
 /**
  * @param {object} payload
@@ -9,7 +12,7 @@ const jwt = require('jsonwebtoken');
 module.exports.generateToken = (
   payload,
   tokenExpiryDate = '1h',
-  secret = process.env.SECRET
+  secret = process.env.RSA_PRIVATE_KEY.replace(/\|\|n\|\|/g, '\n')
 ) => jwt.sign(payload, secret, {
   expiresIn: tokenExpiryDate
 });
@@ -18,4 +21,4 @@ module.exports.generateToken = (
  * @param {string} token
  * @return {object} decodeToken
  */
-module.exports.decodeToken = (token) => jwt.verify(token, process.env.SECRET);
+module.exports.decodeToken = (token) => jwt.verify(token, process.env.RSA_PRIVATE_KEY.replace(/\|\|n\|\|/g, '\n'));

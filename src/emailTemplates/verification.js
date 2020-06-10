@@ -22,10 +22,10 @@ const emailTemplate = (url) => ({
 });
 
 const generateVerificationEmail = (payload, route) => {
-  const url = process.env.FRONT_END_HOST;
+  const url = process.env.ACCESS_CONTROL_ALLOW_ORIGIN;
   const token = generateToken(payload);
   const mailGenerator = getMailGenerator(url);
-  const email = emailTemplate(`${url}/${route}/verify?token=${token}`);
+  const email = emailTemplate(`${url}/${route}/create?token=${token}`);
   const emailBody = mailGenerator.generate(email);
   return emailBody;
 };

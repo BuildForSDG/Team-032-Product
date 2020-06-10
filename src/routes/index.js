@@ -6,7 +6,7 @@ const registerTrainer = require('./trainerRoute');
 
 router.use('', serverDemo);
 router.use('/communities', registerCommunity);
-router.use('/teachers', registerTeacher);
-router.use('/trainers', registerTrainer);
+router.use('/users/teachers', registerTeacher);
+router.use('/users/trainers', registerTrainer);
 
 module.exports = router;

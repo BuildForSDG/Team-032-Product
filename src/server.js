@@ -50,4 +50,6 @@ const port = normalizePort(process.env.PORT);
 
 module.exports = app
   .set('port', port)
-  .listen(port);
+  .listen(port, () => (process.env.NODE_ENV === 'development'
+    ? console.log(`Listening on port ${port}`)
+    : null));

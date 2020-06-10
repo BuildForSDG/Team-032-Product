@@ -1,23 +1,34 @@
 const sgMail = require('@sendgrid/mail');
+const nodemailer = require('nodemailer');
 
 /**
- * @param {string} sendgridApiKey
  * @param {string} to
- * @param {string} from
  * @param {string} subject
  * @param {string} html
+ * @param {string} from
  * @return {string} emailResponse
  */
-const sendMail = async (sendgridApiKey, to, from, subject, html) => {
-  sgMail.setApiKey(sendgridApiKey);
+const sendMail = (to, subject, html, from = 'noreply@powersophia.com') => {
   const msg = {
-    to,
-    from,
-    subject,
-    html
+    to, from, subject, html
   };
-  const emailResponse = await sgMail.send(msg);
-  return emailResponse;
+
+  switch (process.env.NODE_ENV) {
+    case 'production':
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+      return sgMail.send(msg);
+    default:
+      return nodemailer.createTransport(
+        {
+          host: 'smtp.mailtrap.io',
+          port: 2525,
+          auth: {
+            user: process.env.MAILTRAP_SMTP_USERNAME,
+            pass: process.env.MAILTRAP_SMTP_PASSWORD
+          }
+        }
+      ).sendMail(msg);
+  }
 };
 
 module.exports = sendMail;
