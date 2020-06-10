@@ -168,33 +168,32 @@ CREATE SEQUENCE teachers_id_seq;
 CREATE TABLE
 IF NOT EXISTS teachers
 (
-    id integer NOT NULL DEFAULT nextval
-('"teachers_id_seq"'::regclass),
-    email character varying
-(100) COLLATE pg_catalog."default" NOT NULL,
-    phone character varying
-(20) COLLATE pg_catalog."default" NOT NULL,
-    country character varying
-(30) COLLATE pg_catalog."default" NOT NULL,
-    state character varying
-(30) COLLATE pg_catalog."default" NOT NULL,
-    lga character varying
-(30) COLLATE pg_catalog."default" NOT NULL,
-    town character varying
-(30) COLLATE pg_catalog."default" NOT NULL,
+    id integer NOT NULL DEFAULT nextval('teachers_id_seq'::regclass),
+    email character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    phone character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    country character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    state character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    lga character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    town character varying(30) COLLATE pg_catalog."default" NOT NULL,
     deployed boolean NOT NULL DEFAULT false,
-    date_created timestamp
-with time zone NOT NULL,
-    date_modified timestamp
-with time zone NOT NULL,
+    date_created timestamp with time zone NOT NULL,
+    date_modified timestamp with time zone NOT NULL,
     level_of_education_id integer NOT NULL,
-    CONSTRAINT teachers_pkey PRIMARY KEY
-(id),
-    CONSTRAINT teacher_email_key UNIQUE
-(email)
+    CONSTRAINT teachers_pkey PRIMARY KEY (id),
+    CONSTRAINT teacher_email_key UNIQUE (email)
 ,
-    CONSTRAINT teacher_phone_key UNIQUE
-(phone)
+    CONSTRAINT teacher_phone_key UNIQUE (phone)
+,
+    CONSTRAINT teachers_email_fkey FOREIGN KEY (email)
+        REFERENCES public.auth (email) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+        NOT VALID,
+    CONSTRAINT teachers_level_of_education_id_fkey FOREIGN KEY (level_of_education_id)
+        REFERENCES public.level_of_education (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+        NOT VALID
 
 );
 
@@ -237,41 +236,30 @@ CREATE SEQUENCE trainers_id_seq;
 CREATE TABLE
 IF NOT EXISTS trainers
 (
-    id integer NOT NULL DEFAULT nextval
-('"trainers_id_seq"'::regclass),
-    email character varying
-(100) COLLATE pg_catalog."default" NOT NULL,
-    phone character varying
-(20) COLLATE pg_catalog."default" NOT NULL,
-    country character varying
-(30) COLLATE pg_catalog."default" NOT NULL,
-    state character varying
-(30) COLLATE pg_catalog."default" NOT NULL,
-    lga character varying
-(30) COLLATE pg_catalog."default" NOT NULL,
-    town character varying
-(30) COLLATE pg_catalog."default" NOT NULL,
+    id integer NOT NULL DEFAULT nextval('trainers_id_seq'::regclass),
+    email character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    phone character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    country character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    state character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    lga character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    town character varying(30) COLLATE pg_catalog."default" NOT NULL,
     institute_id integer NOT NULL,
-    date_created timestamp
-with time zone NOT NULL,
-    date_modified timestamp
-with time zone NOT NULL,
-    CONSTRAINT trainers_pkey PRIMARY KEY
-(id),
-    CONSTRAINT trainer_email_key UNIQUE
-(email)
+    date_created timestamp with time zone NOT NULL,
+    date_modified timestamp with time zone NOT NULL,
+    CONSTRAINT trainers_pkey PRIMARY KEY (id),
+    CONSTRAINT trainer_email_key UNIQUE (email)
 ,
-    CONSTRAINT trainer_phone_key UNIQUE
-(phone)
+    CONSTRAINT trainer_phone_key UNIQUE (phone)
 ,
-    CONSTRAINT trainers_institute_id_fkey FOREIGN KEY
-(institute_id)
-        REFERENCES public.institutes
-(id) MATCH SIMPLE
-        ON
-UPDATE CASCADE
-        ON
-DELETE CASCADE
+    CONSTRAINT trainers_email_fkey FOREIGN KEY (email)
+        REFERENCES public.auth (email) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+        NOT VALID,
+    CONSTRAINT trainers_institute_id_fkey FOREIGN KEY (institute_id)
+        REFERENCES public.institutes (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
         NOT VALID
 );
 
@@ -311,7 +299,7 @@ COMMENT ON FUNCTION public.date_time_modified_stamp()
 
 
 CREATE TRIGGER auth_date_time_created_stamp
-    AFTER INSERT
+    BEFORE INSERT
     ON public.auth
     FOR EACH ROW
     EXECUTE PROCEDURE public.date_time_created_stamp();

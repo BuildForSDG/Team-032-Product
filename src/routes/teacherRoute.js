@@ -4,6 +4,6 @@ const validator = require('../middlewares/teacherValidator');
 
 router.post('/sign-up', validator.createTeacher,
   TeacherController.createTeacher);
-router.post('/create', TeacherController.verifyEmail);
+router.get('/create', TeacherController.verifyEmail);
 
 module.exports = router;

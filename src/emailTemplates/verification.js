@@ -22,7 +22,7 @@ const emailTemplate = (url) => ({
 });
 
 const generateVerificationEmail = (payload, route) => {
-  const url = process.env.ACCESS_CONTROL_ALLOW_ORIGIN;
+  const url = `${process.env.ACCESS_CONTROL_ALLOW_ORIGIN}/api/v1/users`;
   const token = generateToken(payload);
   const mailGenerator = getMailGenerator(url);
   const email = emailTemplate(`${url}/${route}/create?token=${token}`);

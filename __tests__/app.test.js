@@ -148,7 +148,7 @@ describe('Teacher sign up', () => {
     });
 
     it('returns status 201', async (done) => {
-      const res = await request(app).post(uri).send();
+      const res = await request(app).get(uri).send();
       expect(res.status).toEqual(201);
       done();
     });
@@ -188,7 +188,7 @@ describe('Trainer sign up', () => {
     });
 
     it('returns status 201', async (done) => {
-      const res = await request(app).post(uri).send();
+      const res = await request(app).get(uri).send();
       expect(res.status).toEqual(201);
       done();
     });

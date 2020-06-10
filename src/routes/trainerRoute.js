@@ -4,6 +4,6 @@ const validator = require('../middlewares/trainerValidator');
 
 router.post('/sign-up', validator.createTrainer,
   TrainerController.createTrainer);
-router.post('/create', TrainerController.verifyEmail);
+router.get('/create', TrainerController.verifyEmail);
 
 module.exports = router;
