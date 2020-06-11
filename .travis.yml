@@ -38,4 +38,4 @@ deploy:
       app: dev-power-sophia
       on:
         repo: BuildForSDG/Team-032-Product
-        branch: ft-host-app
+        branch: develop
