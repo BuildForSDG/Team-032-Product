@@ -35,7 +35,7 @@ deploy:
       provider: heroku
       api_key:
         secure: r7xlqiNUJaxmWB8BTt/qWPcFBg8D6ZN25y7Xfs5YzIvL4D+9yb5l9M9o+AMV9f6JLGlsntDxm6Oeh2gHkAsqpOcmjS7dMSS1GujwO5By9dPv3czVN3JQI5WlnZYHDIVKae/eSGm6vrX6GppiNRkxWebJ0Z8Km3SbknIONcXrWMXwE/OROBUeX/ELCDPkNXUI/qMaGc5oXsCBIVH4vmtfbVVsGotXpHPbsPH/a/uqUTeH/1HrWxbqXVsLDy6l1qEE3lLnjMECfwHoNriCd6Hq1KaTUIL7Q/OAZ/yUBeqvXHRtOKSeQLuhQomR5nemvXlePsP69VjqtQSnA2hsBsGg8dRNcdent0ePe9+36QuC6LlWISndX6Typ4DluVxdfftSSFzsSC2ufoCVLqRVZj9dqmVSOCrYn0k80E1QPoT7h1w1z3lDTN2z849n5a3/lapyrM+I+kSuNXqJhQwWKGEDpUmNZ9lSwW3GNj489HPTHBt/inhbuxMB3jr0kJvsMk+rqDeniFlLm/qv01uU8GFrsE/4Rh2im5neMsHhbCgcTnOtlyN0sO+cRN7LldQ1YSKEE4o9yjLOpYz4A5/YAbrbT74vC1T0Rsi93BdY+yan2GtwAovwpzg3PjfucEOIqxMqLU96PHdxv/hmxQbdCu6JyJ6YZ946tqwTOl+jSVTfEl0=
-      app: howmies-api-develop
+      app: dev-power-sophia
       on:
-        repo: Howmies/howmies-api
+        repo: BuildForSDG/Team-032-Product
         branch: ft-host-app
