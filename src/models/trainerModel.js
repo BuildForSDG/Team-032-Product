@@ -1,6 +1,3 @@
-const {
-  uuid
-} = require('uuidv4');
 const pool = require('../config/db.config');
 
 const {
