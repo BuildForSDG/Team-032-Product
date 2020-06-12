@@ -21,6 +21,32 @@ with time zone NOT NULL,
 );
 
 
+----------- ADMIN TABLE
+
+CREATE SEQUENCE admin_id_seq;
+CREATE TABLE
+IF NOT EXISTS admin
+(
+    id integer NOT NULL DEFAULT nextval
+('"admin_id_seq"'::regclass),
+    email character varying
+(100) COLLATE pg_catalog."default" NOT NULL, 
+    first_name character varying
+(30) COLLATE pg_catalog."default" NOT NULL, 
+    last_name character varying
+(30) COLLATE pg_catalog."default" NOT NULL, 
+    date_created timestamp
+with time zone NOT NULL, 
+    date_modified timestamp
+with time zone NOT NULL, 
+    CONSTRAINT admin_pkey PRIMARY KEY
+(id), 
+    CONSTRAINT admin_email_key UNIQUE
+(email)
+);
+
+-------------
+
 CREATE SEQUENCE communities_id_seq;
 CREATE TABLE
 IF NOT EXISTS communities
@@ -329,6 +355,28 @@ CREATE TRIGGER auth_date_time_modified_stamp
 COMMENT ON TRIGGER auth_date_time_modified_stamp ON public.auth
     IS 'Date and time of modification of an authorized app user';
 
+---------
+
+CREATE TRIGGER admin_date_time_created_stamp
+    AFTER INSERT
+    ON public.admin
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.date_time_created_stamp();
+
+COMMENT ON TRIGGER admin_date_time_created_stamp ON public.admin
+    IS 'Date and time of creation of an admin user';
+
+
+CREATE TRIGGER admin_date_time_modified_stamp
+    BEFORE INSERT OR UPDATE 
+    ON public.admin
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.date_time_modified_stamp();
+
+COMMENT ON TRIGGER admin_date_time_modified_stamp ON public.admin
+    IS 'Date and time of modification of an admin app user';
+
+-------------
 
 CREATE TRIGGER communities_date_time_created_stamp
     BEFORE INSERT
