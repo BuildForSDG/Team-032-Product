@@ -1,4 +1,4 @@
-const { body } = require('express-validator');
+const { body, query } = require('express-validator');
 
 module.exports = {
   adminLoginValidator: [
@@ -16,5 +16,15 @@ module.exports = {
       .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/) // included requirement for special xter
       .withMessage('Password MUST be between 8 and 24 characters long, with at least a lower case, an upper case, a number , and special character')
       .escape()
+  ],
+  deployTeacherValidator: [
+    query('teacherId')
+      .exists()
+      .withMessage('Missing required fields')
+      .notEmpty()
+      .withMessage('You havent provided a teacherId')
+      .toInt()
+      .withMessage('Invalid teacherId')
+
   ]
 };

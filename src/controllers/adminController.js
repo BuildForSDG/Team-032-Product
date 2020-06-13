@@ -3,7 +3,9 @@ const { validationResult } = require('express-validator');
 const LoginHandler = require('../utils/loginHandler');
 const pool = require('../config/db.config');
 
-module.exports = (req, res) => {
+const adminController = {};
+
+adminController.adminLogin = (req, res) => {
   // validate request data
 
   const errors = validationResult(req);
@@ -46,3 +48,40 @@ module.exports = (req, res) => {
     }
   });
 };
+
+adminController.deployTeacher = (req, res) => {
+  // validate request data
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
+  // Check teacher id exists
+  const { teacherId } = req.query;
+
+  pool.query('SELECT id FROM teachers WHERE id=$1', [teacherId], (err, result) => {
+    // check for errors with querying?
+    if (!err) {
+      // check that user record was returned
+      if (result.rowCount !== 0) {
+        // teacher exists
+        // update deployed field
+        pool.query('UPDATE public.teachers SET deployed=true WHERE id=$1', [teacherId], (err2, result2) => {
+          // check for errors with querying?
+          if (!err2) {
+            // respond
+            console.log(result2);
+            return res.status(202).json({ status: 202, message: `Teacher with Id: ${teacherId} has been deployed` });
+          }
+          return res.status(503).json({ error: { status: 503, message: `Could not update DB for teacher deployment status due to: ${err2.message}`, stack: err2.stack } });
+        });
+      } else {
+        return res.status(404).json({ error: { status: 401, message: `Invalid teacherId: ${teacherId}. \n Not Found.` } });
+      }
+    } else {
+      return res.status(503).json({ error: { status: 503, message: `Could not query DB for teacher details due to: ${err.message}`, stack: err.stack } });
+    }
+  });
+};
+
+module.exports = adminController;
