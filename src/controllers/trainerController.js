@@ -86,6 +86,7 @@ class TrainerController {
 
       trainer = await Trainer.create(data);
     } catch (e) {
+      console.error(e);
       return handleErrorResponse(res, e.message);
     }
 
