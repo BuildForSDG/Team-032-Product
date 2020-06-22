@@ -55,7 +55,7 @@ describe('Server', () => {
 });
 
 
-describe.skip('Community registration', () => {
+describe('Community registration', () => {
   describe('on minimal request', () => {
     const uri = '/api/v1/communities/reg';
 
@@ -128,6 +128,15 @@ describe('Teacher sign up', () => {
     level_of_education_id: 1
   };
 
+  beforeEach(async (done) => {
+    await pool.query(`INSERT INTO levels_of_education(name) values('Bachelors')
+    ON DUPLICATE KEY id=id;`, () => done());
+  });
+
+  afterEach(async (done) => {
+    await pool.query('DELETE FROM auth WHERE email=\'tobia807@gmail.com\';', () => done());
+  });
+
   describe('Teacher email verification', () => {
     const uri = '/api/v1/users/teachers/sign-up';
 
@@ -142,10 +151,6 @@ describe('Teacher sign up', () => {
   describe('Teacher account activation', () => {
     const token = generateToken({ data: body }, '9999 years');
     const uri = `/api/v1/users/teachers/create?token=${token}`;
-
-    afterEach(async (done) => {
-      pool.query('DELETE FROM auth WHERE email=\'tobia807@gmail.com\'', () => done());
-    });
 
     it('returns status 201', async (done) => {
       const res = await request(app).get(uri).send();
@@ -168,6 +173,16 @@ describe('Trainer sign up', () => {
     institute_id: 1
   };
 
+  beforeEach(async (done) => {
+    await pool.query(`INSERT INTO institutes(name, country, state, lga, address)
+    values('Covenant University', 'Nigeria', 'Ogun', 'Sango', 'Km 10, Idiroko, Sango-Ota, Ogun state.')
+    ON DUPLICATE KEY id=id;`, () => done());
+  });
+
+  afterEach(async (done) => {
+    await pool.query('DELETE FROM auth WHERE email=\'tobia807@gmail.com\'', () => done());
+  });
+
   describe('Trainer email verification', () => {
     const uri = '/api/v1/users/trainers/sign-up';
 
@@ -182,11 +197,6 @@ describe('Trainer sign up', () => {
   describe('Trainer account activation', () => {
     const token = generateToken({ data: body }, '9999 years');
     const uri = `/api/v1/users/trainers/create?token=${token}`;
-
-    afterEach(async (done) => {
-      pool.query('DELETE FROM auth WHERE email=\'tobia807@gmail.com\'', () => done());
-    });
-
     it('returns status 201', async (done) => {
       const res = await request(app).get(uri).send();
       expect(res.status).toEqual(201);
