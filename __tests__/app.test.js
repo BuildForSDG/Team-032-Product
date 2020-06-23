@@ -119,7 +119,7 @@ describe('Community registration', () => {
 });
 
 
-describe('Teacher sign up', async () => {
+describe('Teacher sign up', () => {
   afterEach(async (done) => {
     await pool.query('DELETE FROM auth WHERE email=\'tobia807@gmail.com\';', () => done());
   });
