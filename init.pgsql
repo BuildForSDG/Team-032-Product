@@ -1,8 +1,8 @@
 -- Create tables
 
+DROP TABLE public.auth;
 CREATE SEQUENCE auth_id_seq;
-CREATE TABLE
-IF NOT EXISTS auth
+CREATE TABLE auth
 (
     id integer NOT NULL DEFAULT nextval('"auth_id_seq"'::regclass),
     email character varying(100) COLLATE pg_catalog."default" NOT NULL, 
@@ -16,9 +16,9 @@ with time zone NOT NULL,
 );
 
 
+DROP TABLE public.communities;
 CREATE SEQUENCE communities_id_seq;
-CREATE TABLE
-IF NOT EXISTS communities
+CREATE TABLE communities
 (
     id integer NOT NULL DEFAULT nextval('"communities_id_seq"'::regclass),
     "name" character varying(30) COLLATE pg_catalog."default" NOT NULL,
@@ -37,9 +37,9 @@ IF NOT EXISTS communities
 );
 
 
+DROP TABLE public.subjects;
 CREATE SEQUENCE subjects_id_seq;
-CREATE TABLE
-IF NOT EXISTS subjects
+CREATE TABLE subjects
 (
     id integer NOT NULL DEFAULT nextval('"subjects_id_seq"'::regclass),
     "name" character varying(30) COLLATE pg_catalog."default" NOT NULL,
@@ -50,9 +50,9 @@ IF NOT EXISTS subjects
 );
 
 
+DROP TABLE public.community_subjects_needed;
 CREATE SEQUENCE community_subjects_needed_id_seq;
-CREATE TABLE
-IF NOT EXISTS community_subjects_needed
+CREATE TABLE community_subjects_needed
 (
     id integer NOT NULL DEFAULT nextval('"community_subjects_needed_id_seq"'::regclass),
     community_id integer NOT NULL,
@@ -73,9 +73,9 @@ IF NOT EXISTS community_subjects_needed
 );
 
 
+DROP TABLE public.institutes;
 CREATE SEQUENCE institutes_id_seq;
-CREATE TABLE
-IF NOT EXISTS institutes
+CREATE TABLE institutes
 (
     id integer NOT NULL DEFAULT nextval('"institutes_id_seq"'::regclass),
     "name" character varying(100) COLLATE pg_catalog."default" NOT NULL,
@@ -90,9 +90,9 @@ IF NOT EXISTS institutes
 );
 
 
+DROP TABLE public.levels_of_education;
 CREATE SEQUENCE levels_of_education_id_seq;
-CREATE TABLE
-IF NOT EXISTS levels_of_education
+CREATE TABLE levels_of_education
 (
     id INTEGER NOT NULL DEFAULT nextval('levels_of_education_id_seq'::regclass),
     "name" CHARACTER VARYING(30) COLLATE pg_catalog."default" NOT NULL,
@@ -103,9 +103,9 @@ IF NOT EXISTS levels_of_education
 );
 
 
+DROP TABLE public.teachers;
 CREATE SEQUENCE teachers_id_seq;
-CREATE TABLE
-IF NOT EXISTS teachers
+CREATE TABLE teachers
 (
     id integer NOT NULL DEFAULT nextval('teachers_id_seq'::regclass),
     email character varying(100) COLLATE pg_catalog."default" NOT NULL,
@@ -134,9 +134,9 @@ IF NOT EXISTS teachers
 );
 
 
+DROP TABLE public.teacher_subjects;
 CREATE SEQUENCE teacher_subjects_id_seq;
-CREATE TABLE
-IF NOT EXISTS teacher_subjects
+CREATE TABLE teacher_subjects
 (
     id integer NOT NULL DEFAULT nextval('"teacher_subjects_id_seq"'::regclass),
     teacher_id integer NOT NULL,
@@ -157,9 +157,9 @@ IF NOT EXISTS teacher_subjects
 );
 
 
+DROP TABLE public.trainers;
 CREATE SEQUENCE trainers_id_seq;
-CREATE TABLE
-IF NOT EXISTS trainers
+CREATE TABLE trainers
 (
     id integer NOT NULL DEFAULT nextval('trainers_id_seq'::regclass),
     email character varying(100) COLLATE pg_catalog."default" NOT NULL,
@@ -187,9 +187,9 @@ IF NOT EXISTS trainers
 );
 
 
+DROP TABLE public.trainer_subjects;
 CREATE SEQUENCE trainer_subjects_id_seq;
-CREATE TABLE
-IF NOT EXISTS trainer_subjects
+CREATE TABLE trainer_subjects
 (
     id integer NOT NULL DEFAULT nextval('"trainer_subjects_id_seq"'::regclass),
     trainer_id integer NOT NULL,
