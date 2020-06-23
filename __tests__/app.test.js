@@ -116,23 +116,7 @@ describe('Community registration', () => {
 });
 
 
-describe('Teacher sign up', () => {
-  const body = {
-    email: 'tobia807@gmail.com',
-    password: 'Pass1234!',
-    phone: '+2348181105060',
-    country: 'Nigeria',
-    state: 'Osun',
-    lga: 'Ede-South',
-    town: 'Ede',
-    level_of_education_id: 1
-  };
-
-  beforeEach(async (done) => {
-    await pool.query(`INSERT INTO levels_of_education(name) values('Bachelors')
-    ON DUPLICATE KEY id=id;`, () => done());
-  });
-
+describe('Teacher sign up', async () => {
   afterEach(async (done) => {
     await pool.query('DELETE FROM auth WHERE email=\'tobia807@gmail.com\';', () => done());
   });
@@ -141,7 +125,24 @@ describe('Teacher sign up', () => {
     const uri = '/api/v1/users/teachers/sign-up';
 
     it('returns status 200', async (done) => {
-      const res = await request(app).post(uri).send(body);
+      const levelOfEducationId = await pool.query(`INSERT INTO levels_of_education("name") values('Bachelors')
+      ON CONFLICT("name") DO UPDATE
+      SET "name"=levels_of_education."name" RETURNING id;`)
+        .then((res) => {
+          console.log(res.rows[0].id);
+          return res.rows[0].id;
+        }).catch((e) => console.log(e));
+      const body = {
+        email: 'tobia807@gmail.com',
+        password: 'Pass1234!',
+        phone: '+2348181105060',
+        country: 'Nigeria',
+        state: 'Osun',
+        lga: 'Ede-South',
+        town: 'Ede',
+        level_of_education_id: levelOfEducationId
+      };
+      const res = await request(app).post(uri).send(body).catch(() => null);
       expect(res.status).toEqual(200);
       done();
     });
@@ -149,11 +150,27 @@ describe('Teacher sign up', () => {
 
 
   describe('Teacher account activation', () => {
-    const token = generateToken({ data: body }, '9999 years');
-    const uri = `/api/v1/users/teachers/create?token=${token}`;
-
     it('returns status 201', async (done) => {
-      const res = await request(app).get(uri).send();
+      const levelOfEducationId = await pool.query(`INSERT INTO levels_of_education("name") values('Bachelors')
+      ON CONFLICT("name") DO UPDATE
+      SET "name"=levels_of_education."name" RETURNING id;`)
+        .then((res) => {
+          console.log(res.rows[0].id);
+          return res.rows[0].id;
+        }).catch((e) => console.log(e));
+      const body = {
+        email: 'tobia807@gmail.com',
+        password: 'Pass1234!',
+        phone: '+2348181105060',
+        country: 'Nigeria',
+        state: 'Osun',
+        lga: 'Ede-South',
+        town: 'Ede',
+        level_of_education_id: levelOfEducationId
+      };
+      const token = generateToken({ data: body }, '9999 years');
+      const uri = `/api/v1/users/teachers/create?token=${token}`;
+      const res = await request(app).get(uri).send().catch(() => null);
       expect(res.status).toEqual(201);
       done();
     });
@@ -162,32 +179,32 @@ describe('Teacher sign up', () => {
 
 
 describe('Trainer sign up', () => {
-  const body = {
-    email: 'tobia807@gmail.com',
-    password: 'Pass1234!',
-    phone: '+2348181105060',
-    country: 'Nigeria',
-    state: 'Ogun',
-    lga: 'Ota',
-    town: 'Sango-Ota',
-    institute_id: 1
-  };
-
-  beforeEach(async (done) => {
-    await pool.query(`INSERT INTO institutes(name, country, state, lga, address)
-    values('Covenant University', 'Nigeria', 'Ogun', 'Sango', 'Km 10, Idiroko, Sango-Ota, Ogun state.')
-    ON DUPLICATE KEY id=id;`, () => done());
-  });
-
-  afterEach(async (done) => {
-    await pool.query('DELETE FROM auth WHERE email=\'tobia807@gmail.com\'', () => done());
+  afterEach((done) => {
+    pool.query('DELETE FROM auth WHERE email=\'tobia807@gmail.com\'', () => done());
   });
 
   describe('Trainer email verification', () => {
-    const uri = '/api/v1/users/trainers/sign-up';
-
     it('returns status 200', async (done) => {
-      const res = await request(app).post(uri).send(body);
+      const instituteId = await pool.query(`INSERT INTO institutes("name", country, state, lga, address)
+      values('Covenant University', 'Nigeria', 'Ogun', 'Sango', 'Km 10, Idiroko, Sango-Ota, Ogun state.')
+      ON CONFLICT("name", country) DO UPDATE
+      SET "name"=institutes."name", country=institutes.country RETURNING id;`)
+        .then((res) => {
+          console.log(res.rows[0].id);
+          return res.rows[0].id;
+        }).catch(() => null);
+      const body = {
+        email: 'tobia807@gmail.com',
+        password: 'Pass1234!',
+        phone: '+2348181105060',
+        country: 'Nigeria',
+        state: 'Ogun',
+        lga: 'Ota',
+        town: 'Sango-Ota',
+        institute_id: instituteId
+      };
+      const uri = '/api/v1/users/trainers/sign-up';
+      const res = await request(app).post(uri).send(body).catch(() => null);
       expect(res.status).toEqual(200);
       done();
     });
@@ -195,10 +212,28 @@ describe('Trainer sign up', () => {
 
 
   describe('Trainer account activation', () => {
-    const token = generateToken({ data: body }, '9999 years');
-    const uri = `/api/v1/users/trainers/create?token=${token}`;
     it('returns status 201', async (done) => {
-      const res = await request(app).get(uri).send();
+      const instituteId = await pool.query(`INSERT INTO institutes("name", country, state, lga, address)
+      values('Covenant University', 'Nigeria', 'Ogun', 'Sango', 'Km 10, Idiroko, Sango-Ota, Ogun state.')
+      ON CONFLICT("name", country) DO UPDATE
+      SET "name"=institutes."name", country=institutes.country RETURNING id;`)
+        .then((res) => {
+          console.log(res.rows[0].id);
+          return res.rows[0].id;
+        }).catch(() => null);
+      const body = {
+        email: 'tobia807@gmail.com',
+        password: 'Pass1234!',
+        phone: '+2348181105060',
+        country: 'Nigeria',
+        state: 'Ogun',
+        lga: 'Ota',
+        town: 'Sango-Ota',
+        institute_id: instituteId
+      };
+      const token = generateToken({ data: body }, '9999 years');
+      const uri = `/api/v1/users/trainers/create?token=${token}`;
+      const res = await request(app).get(uri).send().catch(() => null);
       expect(res.status).toEqual(201);
       done();
     });
