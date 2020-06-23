@@ -1,6 +1,6 @@
 -- Create tables
 
-DROP TABLE public.auth;
+DROP TABLE IF EXISTS public.auth;
 CREATE SEQUENCE auth_id_seq;
 CREATE TABLE auth
 (
@@ -16,7 +16,7 @@ with time zone NOT NULL,
 );
 
 
-DROP TABLE public.communities;
+DROP TABLE IF EXISTS public.communities;
 CREATE SEQUENCE communities_id_seq;
 CREATE TABLE communities
 (
@@ -37,7 +37,7 @@ CREATE TABLE communities
 );
 
 
-DROP TABLE public.subjects;
+DROP TABLE IF EXISTS public.subjects;
 CREATE SEQUENCE subjects_id_seq;
 CREATE TABLE subjects
 (
@@ -50,7 +50,7 @@ CREATE TABLE subjects
 );
 
 
-DROP TABLE public.community_subjects_needed;
+DROP TABLE IF EXISTS public.community_subjects_needed;
 CREATE SEQUENCE community_subjects_needed_id_seq;
 CREATE TABLE community_subjects_needed
 (
@@ -73,7 +73,7 @@ CREATE TABLE community_subjects_needed
 );
 
 
-DROP TABLE public.institutes;
+DROP TABLE IF EXISTS public.institutes;
 CREATE SEQUENCE institutes_id_seq;
 CREATE TABLE institutes
 (
@@ -90,7 +90,7 @@ CREATE TABLE institutes
 );
 
 
-DROP TABLE public.levels_of_education;
+DROP TABLE IF EXISTS public.levels_of_education;
 CREATE SEQUENCE levels_of_education_id_seq;
 CREATE TABLE levels_of_education
 (
@@ -103,7 +103,7 @@ CREATE TABLE levels_of_education
 );
 
 
-DROP TABLE public.teachers;
+DROP TABLE IF EXISTS public.teachers;
 CREATE SEQUENCE teachers_id_seq;
 CREATE TABLE teachers
 (
@@ -134,7 +134,7 @@ CREATE TABLE teachers
 );
 
 
-DROP TABLE public.teacher_subjects;
+DROP TABLE IF EXISTS public.teacher_subjects;
 CREATE SEQUENCE teacher_subjects_id_seq;
 CREATE TABLE teacher_subjects
 (
@@ -157,7 +157,7 @@ CREATE TABLE teacher_subjects
 );
 
 
-DROP TABLE public.trainers;
+DROP TABLE IF EXISTS public.trainers;
 CREATE SEQUENCE trainers_id_seq;
 CREATE TABLE trainers
 (
@@ -187,7 +187,7 @@ CREATE TABLE trainers
 );
 
 
-DROP TABLE public.trainer_subjects;
+DROP TABLE IF EXISTS public.trainer_subjects;
 CREATE SEQUENCE trainer_subjects_id_seq;
 CREATE TABLE trainer_subjects
 (
