@@ -24,13 +24,13 @@ class TeacherModel {
     };
     newTeacher.password = hashPassword(newTeacher.password);
 
-    const user = `INSERT INTO
-        teachers(email, phone, country, state, lga, town, level_of_education_id)
-        VALUES($1, $2, $3, $4, $5, $6, $7)
-        returning *`;
     const auth = `INSERT INTO
         auth(email, password)
         VALUES($1, $2)
+        returning *`;
+    const user = `INSERT INTO
+        teachers(email, phone, country, state, lga, town, level_of_education_id)
+        VALUES($1, $2, $3, $4, $5, $6, $7)
         returning *`;
 
     const userValue = [
