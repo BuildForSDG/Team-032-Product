@@ -35,7 +35,10 @@ beforeAll((done) => {
 // });
 
 afterAll((done) => {
-  server.close(() => pool.end(() => done()));
+  server.close(
+    () => done()
+    // () => pool.end(() => done())
+  );
 });
 
 describe('Server', () => {

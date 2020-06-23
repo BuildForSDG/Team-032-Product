@@ -86,7 +86,6 @@ class TeacherController {
 
       teacher = await Teacher.create(data);
     } catch (e) {
-      console.log(e);
       return handleErrorResponse(res, e.message);
     }
 
